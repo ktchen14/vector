@@ -1,0 +1,119 @@
+.libs
+vector.pc
+
+# C
+
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Autotools
+
+# http://www.gnu.org/software/automake
+
+Makefile.in
+/tool/ar-lib
+/tool/mdate-sh
+/tool/py-compile
+/tool/test-driver
+/tool/ylwrap
+.deps/
+.dirstamp
+
+# http://www.gnu.org/software/autoconf
+
+autom4te.cache
+/autoscan.log
+/autoscan-*.log
+/aclocal.m4
+/tool/compile
+/tool/config.guess
+/config.h.in
+/config.log
+/config.status
+/tool/config.sub
+/configure
+/configure.scan
+/tool/depcomp
+/tool/install-sh
+/tool/missing
+/tool/stamp-h1
+
+# https://www.gnu.org/software/libtool/
+
+/libtool
+/tool/ltmain.sh
+
+# http://www.gnu.org/software/m4/
+
+/tool/libtool.m4
+/tool/ltoptions.m4
+/tool/ltsugar.m4
+/tool/ltversion.m4
+/tool/lt~obsolete.m4
+
+# Generated Makefile 
+Makefile
+
+# CMake
+
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+# CMake Doxygen
+CMakeDoxyfile.tpl.bak
+CMakeDoxyfile.in
+CMakeDoxygenDefaults.cmake
+Doxyfile.documentation
+
+# CTest
+DartConfiguration.tcl
