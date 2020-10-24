@@ -144,3 +144,7 @@ blocks:
       - cmake . -DCODE_COVERAGE=ON
       - ctest --output-on-failure
       - bash <(curl -s https://codecov.io/bash)
+
+promotions:
+- name: Release
+  pipeline_file: release.yml

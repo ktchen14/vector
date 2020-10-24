@@ -1,0 +1,16 @@
+version: v1.0
+name: Release Pipeline
+
+agent:
+  machine:
+    type: e1-standard-2
+
+blocks:
+- name: Pack
+  task:
+    jobs:
+    - name: Address
+      commands:
+      - autoreconf --install
+      - ./configure
+      - make dist
