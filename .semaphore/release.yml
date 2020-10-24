@@ -11,6 +11,7 @@ blocks:
     jobs:
     - name: Address
       commands:
+      - checkout
       - autoreconf --install
       - ./configure
       - make dist
