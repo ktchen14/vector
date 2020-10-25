@@ -3,6 +3,7 @@ Vector
 
 [![CI Status](https://ktchen14.semaphoreci.com/badges/vector/branches/master.svg)](https://ktchen14.semaphoreci.com/projects/vector)
 [![Code Coverage](https://codecov.io/gh/ktchen14/vector/branch/master/graph/badge.svg?token=7EiRhnNBeZ)](https://codecov.io/gh/ktchen14/vector)
+[![Documentation Status](https://readthedocs.org/projects/vector-c/badge/)](https://readthedocs.org/projects/vector-c/)
 
 [API Documentation](https://vector-c.readthedocs.io/en/stable/)
 
