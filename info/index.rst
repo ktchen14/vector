@@ -25,8 +25,12 @@ Welcome to Vector's documentation!
 
    * - `vector_t`
      - Used to indicate a vector with an indeterminate element type
+   * - `vector_t()`
+     - Construct the type name of a vector with element type *type*
    * - `vector_c`
      - A `vector_t` with a ``const`` element type
+   * - `vector_c()`
+     - Construct the type name of a vector with ``const`` element type *type*
    * - `vector_length()`
      - Return the length of the *vector*
    * - `vector_volume()`
