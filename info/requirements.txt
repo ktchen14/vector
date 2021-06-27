@@ -4,5 +4,5 @@ lxml
 # https://github.com/sphinx-doc/sphinx/issues/6564
 docutils>=0.15
 
-sphinx>=3.2
-sphinx-readable-theme
+sphinx>=4.0
+furo
