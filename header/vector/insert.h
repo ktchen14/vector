@@ -34,7 +34,7 @@
  *
  * @see vector_insert_z() - the explicit interface analogue
  */
-//= inline vector_t
+//= vector_t
 //= vector_insert(restrict vector_t vector, size_t i, const void *restrict elmt)
 #define vector_insert(v, ...) vector_insert_z((v), __VA_ARGS__, VECTOR_Z((v)))
 
@@ -98,7 +98,7 @@ inline vector_t vector_insert_z(
  *
  * @see vector_inject_z() - the explicit interface analogue
  */
-//= inline vector_t vector_inject(
+//= vector_t vector_inject(
 //=   restrict vector_t vector, size_t i, const void *restrict elmt, size_t n)
 #define vector_inject(v, ...) vector_inject_z((v), __VA_ARGS__, VECTOR_Z((v)))
 
@@ -159,7 +159,7 @@ inline vector_t vector_inject_z(
  *
  * @see vector_append_z() - the explicit interface analogue
  */
-//= inline vector_t
+//= vector_t
 //= vector_append(restrict vector_t vector, const void *restrict elmt)
 #define vector_append(v, ...) vector_append_z((v), __VA_ARGS__, VECTOR_Z((v)))
 
@@ -211,7 +211,7 @@ inline vector_t vector_append_z(
  *
  * @see vector_extend_z() - the explicit interface analogue
  */
-//= inline vector_t
+//= vector_t
 //= vector_extend(restrict vector_t vector, const void *restrict elmt, size_t n)
 #define vector_extend(v, ...) vector_extend_z((v), __VA_ARGS__, VECTOR_Z((v)))
 

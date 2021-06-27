@@ -103,7 +103,7 @@ inline vector_t vector_ensure_z(vector_t vector, size_t length, size_t z)
   __attribute__((nonnull, warn_unused_result));
 
 /**
- * @brief Reduce the volume of the @a vector to its length
+ * @brief Reduce the @volume of the @a vector to its @length
  *
  * This is almost a vector_resize() to the vector's length. However if the
  * resize fails then @a vector will be returned umodified and the value of
@@ -118,7 +118,7 @@ inline vector_t vector_ensure_z(vector_t vector, size_t length, size_t z)
 #define vector_shrink(v) vector_shrink_z((v), VECTOR_Z((v)))
 
 /**
- * @brief Reduce the volume of the @a vector to its length
+ * @brief Reduce the @volume of the @a vector to its @length
  *
  * This is almost a vector_resize_z() to the vector's length. However if the
  * resize fails then the @a vector will be returned umodified and the value of

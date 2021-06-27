@@ -1,3 +1,9 @@
 dl.c.macro > dt.c.sig-object::before {
   content: "#define ";
 }
+
+/* Skip header shadow when scrolled from Furo as it doesn't work on mobile. */
+.mobile-header.scrolled {
+  border-bottom: 1px solid var(--color-header-border);
+  box-shadow: none;
+}

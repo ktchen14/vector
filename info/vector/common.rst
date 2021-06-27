@@ -1,5 +1,5 @@
-Core Definitions and Operations
-===============================
+Fundamentals
+============
 
 .. rubric:: Common Interface
 .. list-table::

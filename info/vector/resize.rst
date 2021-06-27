@@ -1,5 +1,5 @@
-Vector Expansion and Contraction
-================================
+Expansion and Contraction
+=========================
 
 .. rubric:: Implicit Interface
 .. list-table::
@@ -11,7 +11,7 @@ Vector Expansion and Contraction
    * - `vector_ensure()`
      - Ensure that the `volume <vector_volume>` of the *vector* is no less than *length*
    * - `vector_shrink()`
-     - Reduce the volume of the *vector* to its length
+     - Reduce the `volume <vector_volume>` of the *vector* to its `length <vector_length>`
 
 .. rubric:: Explicit Interface
 .. list-table::
@@ -23,7 +23,7 @@ Vector Expansion and Contraction
    * - `vector_ensure_z()`
      - Ensure that the `volume <vector_volume>` of the *vector* is no less than *length*
    * - `vector_shrink_z()`
-     - Reduce the volume of the *vector* to its length
+     - Reduce the `volume <vector_volume>` of the *vector* to its `length <vector_length>`
 
 .. autoaeratefunction:: vector_resize
 .. autoaeratefunction:: vector_resize_z

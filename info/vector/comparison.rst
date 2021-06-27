@@ -9,8 +9,7 @@ Comparison
    * - `vector_eq()`
      - Return whether vector *va* is equivalent to vector *vb*
    * - `vector_eq_with()`
-     - Return whether vector *va* is equivalent to vector *vb* with contextual
-       information
+     - Return whether vector *va* is equivalent to vector *vb* with contextual information
    * - `vector_cmp()`
      - TODO
    * - `vector_cmp_with()`
@@ -24,8 +23,7 @@ Comparison
    * - `vector_eq_z()`
      - Return whether vector *va* is equivalent to vector *vb*
    * - `vector_eq_with_z()`
-     - Return whether vector *va* is equivalent to vector *vb* with contextual
-       information
+     - Return whether vector *va* is equivalent to vector *vb* with contextual information
 
 .. autoaeratefunction:: vector_eq
 .. autoaeratefunction:: vector_eq_z
