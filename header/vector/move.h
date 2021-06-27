@@ -24,7 +24,7 @@
  * @param i the index of an element in the @a vector to swap
  * @param j the index of an element in the @a vector to swap
  *
- * @see vector_swap_z() - The explicit interface analogue
+ * @see vector_swap_z() - the explicit interface analogue
  */
 //= void vector_swap(vector_t vector, size_t i, size_t j)
 #define vector_swap(v, ...) vector_swap_z((v), __VA_ARGS__, VECTOR_Z((v)))
@@ -41,7 +41,7 @@
  * @param j the index of an element in the @a vector to swap
  * @param z the element size of the @a vector
  *
- * @see vector_swap() - The implicit interface analogue
+ * @see vector_swap() - the implicit interface analogue
  */
 inline void vector_swap_z(vector_t vector, size_t i, size_t j, size_t z)
   __attribute__((nonnull));
@@ -69,7 +69,7 @@ inline void vector_swap_z(vector_t vector, size_t i, size_t j, size_t z)
  * @param target the index in the @a vector to move the element to
  * @param source the index of the element in the @a vector to move
  *
- * @see vector_move_z() - The explicit interface analogue
+ * @see vector_move_z() - the explicit interface analogue
  */
 //= void vector_move(vector_t vector, size_t target, size_t source)
 #define vector_move(v, ...) vector_move_z((v), __VA_ARGS__, VECTOR_Z((v)))
@@ -98,7 +98,7 @@ inline void vector_swap_z(vector_t vector, size_t i, size_t j, size_t z)
  * @param source the index of the element in the @a vector to move
  * @param z the element size of the @a vector
  *
- * @see vector_move() - The implicit interface analogue
+ * @see vector_move() - the implicit interface analogue
  */
 inline void vector_move_z(
     vector_t vector, size_t target, size_t source, size_t z)

@@ -1,5 +1,5 @@
-Element Access and Lookup
-=========================
+Access and Lookup
+=================
 
 .. rubric:: Implicit Interface
 .. list-table::

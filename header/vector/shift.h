@@ -28,7 +28,7 @@
  * On success the shrunk vector will be returned. Otherwise the vector will be
  * returned as is (without the element).
  *
- * If no last element is in the @a vector (the @a vector's @length is zero) then
+ * If no last element is in the @a vector (the @a vector's length is zero) then
  * the behavior is undefined.
  *
  * @param vector the vector to operate on
@@ -50,7 +50,7 @@
  * On success the shrunk vector will be returned. Otherwise the vector will be
  * returned as is (without the element).
  *
- * If no last element is in the @a vector (the @a vector's @length is zero) then
+ * If no last element is in the @a vector (the @a vector's length is zero) then
  * the behavior is undefined.
  *
  * @param vector the vector to operate on
@@ -76,8 +76,8 @@ inline vector_t vector_pull_z(vector_t vector, void *elmt, size_t z)
  * On success the shrunk vector will be returned. Otherwise the vector will be
  * returned as is (without the element).
  *
- * If no first element is in the @a vector (the @a vector's @length is zero)
- * then the behavior is undefined.
+ * If no first element is in the @a vector (the @a vector's length is zero) then
+ * the behavior is undefined.
  *
  * @param vector the vector to operate on
  * @param elmt the location to copy the element to or @c NULL
@@ -101,8 +101,8 @@ inline vector_t vector_pull_z(vector_t vector, void *elmt, size_t z)
  * On success the shrunk vector will be returned. Otherwise the vector will be
  * returned as is (without the element).
  *
- * If no first element is in the @a vector (the @a vector's @length is zero)
- * then the behavior is undefined.
+ * If no first element is in the @a vector (the @a vector's length is zero) then
+ * the behavior is undefined.
  *
  * @param vector the vector to operate on
  * @param elmt the location to copy the element to or @c NULL

@@ -1,5 +1,5 @@
-Element Insertion
-=================
+Insertion
+=========
 
 .. rubric:: Implicit Interface
 .. list-table::

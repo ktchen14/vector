@@ -3,11 +3,10 @@ Welcome to Vector's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :hidden:
 
    vector/common
-   vector/create
-   vector/delete
+   vector/create-delete
    vector/access
    vector/debug
    vector/resize
@@ -49,7 +48,7 @@ Welcome to Vector's documentation!
 
    * - `vector_import()`
      - Allocate and initialize a vector from *length* elements of *data*
-   * - `vector_define`
+   * - `vector_define()`
      - Allocate and initialize a vector from the argument list
 
    * - `vector_tail()`
@@ -63,7 +62,7 @@ Welcome to Vector's documentation!
    * - `vector_ensure()`
      - Ensure that the `volume <vector_volume>` of the *vector* is no less than *length*
    * - `vector_shrink()`
-     - Reduce the volume of the *vector* to its length
+     - Reduce the `volume <vector_volume>` of the *vector* to its `length <vector_length>`
 
    * - `vector_insert()`
      - Insert the data at *elmt* into the *vector* at index *i*
@@ -125,7 +124,7 @@ Welcome to Vector's documentation!
    * - `vector_ensure_z()`
      - Ensure that the `volume <vector_volume>` of the *vector* is no less than *length*
    * - `vector_shrink_z()`
-     - Reduce the volume of the *vector* to its length
+     - Reduce the `volume <vector_volume>` of the *vector* to its `length <vector_length>`
 
    * - `vector_insert_z()`
      - Insert the data at *elmt* into the *vector* at index *i*
@@ -164,4 +163,3 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`search`
