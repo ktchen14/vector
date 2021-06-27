@@ -84,6 +84,8 @@ Welcome to Vector's documentation!
      - Insert the data at *elmt* as the last element in the *vector*
    * - `vector_pull()`
      - Copy the last element in the *vector* to *elmt* and remove it
+   * - `vector_unshift()`
+     - Insert the data at *elmt* as the first element in the *vector*
    * - `vector_shift()`
      - Copy the first element in the *vector* to *elmt* and remove it
 
@@ -142,11 +144,13 @@ Welcome to Vector's documentation!
    * - `vector_truncate_z()`
      - Reduce the `length <vector_length>` of the *vector* to *length*
 
-   * - `vector_push()`
+   * - `vector_push_z()`
      - Insert the data at *elmt* as the last element in the *vector*
-   * - `vector_pull()`
+   * - `vector_pull_z()`
      - Copy the last element in the *vector* to *elmt* and remove it
-   * - `vector_shift()`
+   * - `vector_unshift_z()`
+     - Insert the data at *elmt* as the first element in the *vector*
+   * - `vector_shift_z()`
      - Copy the first element in the *vector* to *elmt* and remove it
 
    * - `vector_swap_z()`

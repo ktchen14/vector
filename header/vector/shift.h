@@ -10,10 +10,22 @@
 #define inline
 #endif /* VECTOR_TEST */
 
-/// @copydoc vector_append()
+/**
+ * @copybrief vector_append()
+ *
+ * This is just vector_append().
+ *
+ * @see vector_push_z() - the explicit interface analogue
+ */
 #define vector_push vector_append
 
-/// @copydoc vector_append_z()
+/**
+ * @copybrief vector_append_z()
+ *
+ * This is just vector_append_z().
+ *
+ * @see vector_push() - the implicit interface analogue
+ */
 #define vector_push_z vector_append_z
 
 /**
@@ -59,6 +71,56 @@
  * @return the resultant vector
  */
 inline vector_t vector_pull_z(vector_t vector, void *elmt, size_t z)
+  __attribute__((nonnull(1), warn_unused_result));
+
+/**
+ * @brief Insert the data at @a elmt as the last element in the @a vector
+ *
+ * If @a elmt is @c NULL then the inserted element will be uninitialized.
+ *
+ * If the resultant length of the @a vector would overflow a @c size_t then this
+ * will set @c errno to @c ENOMEM and return @c NULL. Otherwise this will call
+ * vector_ensure(). If that fails then the @a vector will be unmodified and the
+ * value of @c errno set by realloc() will be retained.
+ *
+ * If @a elmt isn't @c NULL and its type is incompatible with the element type
+ * of the @a vector then the behavior is undefined. If @a elmt is a location in
+ * the @a vector itself then the behavior is undefined.
+ *
+ * @param vector the vector to operate on
+ * @param elmt the location of the element to unshift
+ * @return the resultant vector on success; otherwise @c NULL
+ *
+ * @see vector_unshift_z() - the explicit interface analogue
+ */
+//= vector_t vector_unshift(restrict vector_t vector, const void *restrict elmt)
+#define vector_unshift(v, ...) vector_unshift_z((v), __VA_ARGS__, VECTOR_Z((v)))
+
+/**
+ * @brief Insert the data at @a elmt as the first element in the @a vector
+ *
+ * If @a elmt is @c NULL then the inserted element will be uninitialized.
+ *
+ * If the resultant length of the @a vector would overflow a @c size_t then this
+ * will set @c errno to @c ENOMEM and return @c NULL. Otherwise this will call
+ * vector_ensure(). If that fails then the @a vector will be unmodified and the
+ * value of @c errno set by realloc() will be retained.
+ *
+ * If @a elmt isn't @c NULL and its type is incompatible with the element type
+ * of the @a vector then the behavior is undefined. If @a elmt is a location in
+ * the @a vector itself then the behavior is undefined.
+ *
+ * @param vector the vector to operate on
+ * @param elmt the location of the element to unshift
+ * @param z the element size of the @a vector
+ * @return the resultant vector on success; otherwise @c NULL
+ *
+ * @see vector_unshift() - the implicit interface analogue
+ */
+inline vector_t vector_unshift_z(
+    restrict vector_t vector,
+    const void *restrict elmt,
+    size_t z)
   __attribute__((nonnull(1), warn_unused_result));
 
 /**
