@@ -28,35 +28,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include <stddef.h>
-
 #include "vector/common.h"
-
-/**
- * @brief Allocate and initialize a vector by duplicating @a source
- *
- * Attempt to create a vector with the same volume and length as @a source. If
- * this fails and the length of @a source is less than its volume then attempt
- * to create a vector with the same length as @a source.
- *
- * If either of these are successful then memcpy() each element in @a source
- * into the new vector.
- *
- * If this fails then it will set @c errno to @c ENOMEM.
- *
- * @return the vector on success; otherwise @c NULL
- *
- * @see vector_duplicate() - The implicit interface analogue
- * @see vector_duplicate_z() - The explicit interface analogue
- */
-vector_t vector_duplicate_z(vector_c source, size_t z)
-  __attribute__((__malloc__, nonnull));
-
-/// @copydoc vector_duplicate_z()
-//= vector_t vector_duplicate(vector_c source)
-#define vector_duplicate(source) \
-  vector_duplicate_z(source, VECTOR_Z((source)))
-
 #include "vector/access.h"
 #include "vector/comparison.h"
 #include "vector/create.h"

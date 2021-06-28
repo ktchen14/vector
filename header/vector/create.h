@@ -83,6 +83,43 @@ inline vector_t vector_import_z(const void *data, size_t length, size_t z)
   vector_import(__data, sizeof(__data) / sizeof(__data[0])); \
 })
 
+/**
+ * @brief Allocate and initialize a vector by duplicating @a source
+ *
+ * Attempt to create a vector with the same volume and length as @a source. If
+ * this fails and the length of @a source is less than its volume then attempt
+ * to create a vector with the same length as @a source. If either of these are
+ * successful then memcpy() each element in @a source into the new vector.
+ *
+ * If this fails then this will set @c errno to @c ENOMEM and return @c NULL.
+ *
+ * @param source the source vector to duplicate
+ * @return the vector on success; otherwise @c NULL
+ *
+ * @see vector_duplicate_z() - the explicit interface analogue
+ */
+//= vector_t vector_duplicate(vector_c source)
+#define vector_duplicate(v) vector_duplicate_z(v, VECTOR_Z((v)))
+
+/**
+ * @brief Allocate and initialize a vector by duplicating @a source
+ *
+ * Attempt to create a vector with the same volume and length as @a source. If
+ * this fails and the length of @a source is less than its volume then attempt
+ * to create a vector with the same length as @a source. If either of these are
+ * successful then memcpy() each element in @a source into the new vector.
+ *
+ * If this fails then this will set @c errno to @c ENOMEM and return @c NULL.
+ *
+ * @param source the source vector to duplicate
+ * @param z the element size of the @a source vector
+ * @return the vector on success; otherwise @c NULL
+ *
+ * @see vector_duplicate() - the implicit interface analogue
+ */
+inline vector_t vector_duplicate_z(vector_c source, size_t z)
+  __attribute__((__malloc__, nonnull));
+
 #ifdef VECTOR_TEST
 #undef inline
 #endif /* VECTOR_TEST */
