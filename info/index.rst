@@ -50,6 +50,8 @@ Welcome to Vector's documentation!
      - Allocate and initialize a vector from *length* elements of *data*
    * - `vector_define()`
      - Allocate and initialize a vector from the argument list
+   * - `vector_duplicate()`
+     - Allocate and initialize a vector by duplicating *source*
 
    * - `vector_tail()`
      - Return a pointer to the last element in the *vector*
@@ -106,6 +108,8 @@ Welcome to Vector's documentation!
 
    * - `vector_import_z()`
      - Allocate and initialize a vector from *length* elements of *data*
+   * - `vector_duplicate_z()`
+     - Allocate and initialize a vector by duplicating *source*
 
    * - `vector_at()`
      - Return a pointer to the element in the *vector* at index *i*

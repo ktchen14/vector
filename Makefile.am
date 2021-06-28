@@ -15,8 +15,7 @@ libvector_la_SOURCES = source/vector/common.c \
 		       source/vector/resize.c \
 		       source/vector/search.c \
 		       source/vector/shift.c \
-		       source/vector/sort.c \
-		       source/vector.c
+		       source/vector/sort.c
 libvector_la_CFLAGS = -I$(top_srcdir)/header -Wall
 
 pkgconfig_DATA = data/vector.pc
