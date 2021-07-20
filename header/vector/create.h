@@ -99,7 +99,7 @@ inline vector_t vector_import_z(const void *data, size_t length, size_t z)
  * @see vector_duplicate_z() - the explicit interface analogue
  */
 //= vector_t vector_duplicate(vector_c source)
-#define vector_duplicate(v) vector_duplicate_z(v, VECTOR_Z((v)))
+#define vector_duplicate(v) vector_duplicate_z((v), VECTOR_Z((v)))
 
 /**
  * @brief Allocate and initialize a vector by duplicating @a source
