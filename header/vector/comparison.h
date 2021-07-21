@@ -186,7 +186,7 @@ __vector_inline__ _Bool vector_eq_with_z(
 __vector_inline__ int vector_cmp_z(
     vector_c va,
     vector_c vb,
-    int (*cmp)(const void *a, const void *b) __attribute__((nonnull)),
+    int (*cmp)(const void *a, const void *b),
     size_t za,
     size_t zb)
   __attribute__((nonnull(3)));
@@ -274,8 +274,7 @@ __vector_inline__ int vector_cmp_z(
 __vector_inline__ int vector_cmp_with_z(
     vector_c va,
     vector_c vb,
-    int (*cmp)(const void *a, const void *b, void *data)
-      __attribute__((nonnull(1, 2))),
+    int (*cmp)(const void *a, const void *b, void *data),
     void *data,
     size_t za,
     size_t zb)
