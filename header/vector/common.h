@@ -5,10 +5,6 @@
 
 #include <stddef.h>
 
-#ifndef __vector_inline__
-#define __vector_inline__ inline
-#endif /* __vector_inline__ */
-
 /**
  * @brief Used to indicate a vector with an indeterminate element type
  *
@@ -189,6 +185,16 @@ struct __vector_header_t {
     )); \
   _Pragma("GCC diagnostic pop") \
 })
+
+// Define __vector_inline__ to `inline`, if it isn't already defined, to inline
+// most vector code. If __vector_inline__ is defined to `` (the zero length
+// identifier) before this, then most vector code won't be inlined; this is
+// useful to make function interposition work. Note that if __vector_inline__ is
+// defined, its definition must be `` or `inline`; otherwise the behavior is
+// undefined.
+#ifndef __vector_inline__
+#define __vector_inline__ inline
+#endif /* __vector_inline__ */
 
 /// @endcond
 
