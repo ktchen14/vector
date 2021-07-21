@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I tool
 
-SUBDIRS = header
+SUBDIRS = header test
 
 lib_LTLIBRARIES = libvector.la
 libvector_la_SOURCES = source/vector/common.c \

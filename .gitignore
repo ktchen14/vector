@@ -1,5 +1,4 @@
 .libs
-vector.pc
 
 # C
 
@@ -59,6 +58,7 @@ Makefile.in
 /tool/ylwrap
 .deps/
 .dirstamp
+test-suite.log
 
 # http://www.gnu.org/software/autoconf
 
@@ -92,8 +92,9 @@ autom4te.cache
 /tool/ltversion.m4
 /tool/lt~obsolete.m4
 
-# Generated Makefile
+# Generated Makefile and output
 Makefile
+/data/vector.pc
 
 # CMake
 
