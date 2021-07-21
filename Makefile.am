@@ -1,5 +1,7 @@
 ACLOCAL_AMFLAGS = -I tool
 
+EXTRA_DIST = README.md LICENSE VERSION
+
 SUBDIRS = header test
 
 lib_LTLIBRARIES = libvector.la

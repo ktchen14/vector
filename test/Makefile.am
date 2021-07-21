@@ -1,3 +1,17 @@
+# =============================== System Test =============================== #
+
+EXTRA_PROGRAMS = test_system
+test_system_SOURCES = system.c
+
+installcheck-local:
+	$(MAKE) $(AM_MAKEFLAGS) test_system$(EXEEXT) \
+		CFLAGS="-I$(DESTDIR)$(includedir) -Wall -Wextra -Werror" \
+		LDADD="$(DESTDIR)$(libdir)/libvector.la" \
+		DEPENDENCIES="$(DESTDIR)$(libdir)/libvector.la"
+	./test_system$(EXEEXT)
+
+# ================================ Unit Test ================================ #
+
 check_LTLIBRARIES = libstub.la libvector_test.la
 check_PROGRAMS =
 TESTS = $(check_PROGRAMS)
