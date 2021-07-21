@@ -6,10 +6,6 @@
 #include <stddef.h>
 #include "common.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
 /**
  * @brief Resize the @volume of the @a vector to @a volume
  *
@@ -50,8 +46,9 @@
  *
  * @see vector_resize() - the implicit interface analogue
  */
-inline vector_t vector_resize_z(vector_t vector, size_t volume, size_t z)
-  __attribute__((nonnull, warn_unused_result));
+__attribute__((nonnull, warn_unused_result))
+__vector_inline__
+vector_t vector_resize_z(vector_t vector, size_t volume, size_t z);
 
 /**
  * @brief Ensure that the @volume of the @a vector is no less than @a length
@@ -99,8 +96,9 @@ inline vector_t vector_resize_z(vector_t vector, size_t volume, size_t z)
  * @param z the element size of the @a vector
  * @return the resultant vector on success; otherwise @c NULL
  */
-inline vector_t vector_ensure_z(vector_t vector, size_t length, size_t z)
-  __attribute__((nonnull, warn_unused_result));
+__attribute__((nonnull, warn_unused_result))
+__vector_inline__
+vector_t vector_ensure_z(vector_t vector, size_t length, size_t z);
 
 /**
  * @brief Reduce the @volume of the @a vector to its @length
@@ -130,15 +128,11 @@ inline vector_t vector_ensure_z(vector_t vector, size_t length, size_t z)
  *
  * @see vector_shrink() - the implicit interface analogue
  */
-inline vector_t vector_shrink_z(vector_t vector, size_t z)
+__vector_inline__ vector_t vector_shrink_z(vector_t vector, size_t z)
   __attribute__((nonnull, returns_nonnull, warn_unused_result));
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
 
 #endif /* VECTOR_RESIZE_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "resize.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

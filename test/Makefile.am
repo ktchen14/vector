@@ -37,7 +37,7 @@ libvector_test_la_SOURCES = $(top_srcdir)/source/vector/common.c \
 libvector_test_la_CFLAGS = -I$(top_srcdir)/header \
 			   -Wall -Wextra -Werror \
 			   -Dmalloc=stub_malloc -Drealloc=stub_realloc -Dfree=stub_free \
-			   -DVECTOR_TEST
+			   -D__vector_inline__=
 
 libvector_test_la_LIBADD = libstub.la
 libvector_test_la_LDFLAGS = -rpath $(abs_builddir) @test_vector_la_ldflags@
@@ -46,7 +46,7 @@ libvector_test_la_LDFLAGS = -rpath $(abs_builddir) @test_vector_la_ldflags@
 # definitions of RTLD_DEFAULT and RTLD_NEXT from <dlfcn.h>
 TEST_CFLAGS = -I$(top_srcdir)/header \
 	      -Wall -Wextra -Werror \
-	      -D_GNU_SOURCE -DVECTOR_TEST
+	      -D_GNU_SOURCE -D__vector_inline__=
 TEST_LDADD = libvector_test.la -ldl
 
 check_PROGRAMS += test_vector_common

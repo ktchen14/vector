@@ -5,19 +5,11 @@
 
 #include "common.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
 /// Deallocate the @a vector and return @c NULL
-inline void *vector_delete(vector_t vector);
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
+__vector_inline__ void *vector_delete(vector_t vector) __attribute__((nonnull));
 
 #endif /* VECTOR_DELETE_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "delete.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

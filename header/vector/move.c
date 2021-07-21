@@ -10,11 +10,7 @@
 #include "move.h"
 #include "access.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
-inline void vector_move_z(
+__vector_inline__ void vector_move_z(
     vector_t vector, size_t target, size_t source, size_t z) {
   if (target == source)
     return;
@@ -28,7 +24,8 @@ inline void vector_move_z(
   }
 }
 
-inline void vector_swap_z(vector_t vector, size_t i, size_t j, size_t z) {
+__vector_inline__
+void vector_swap_z(vector_t vector, size_t i, size_t j, size_t z) {
   char *a = vector_at(vector, i, z);
   char *b = vector_at(vector, j, z);
 
@@ -39,9 +36,5 @@ inline void vector_swap_z(vector_t vector, size_t i, size_t j, size_t z) {
     b[k] = buffer;
   }
 }
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
 
 #endif /* VECTOR_MOVE_C */

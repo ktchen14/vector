@@ -6,10 +6,6 @@
 #include <stddef.h>
 #include "common.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
 /// @addtogroup vector_module Vector
 /// @{
 /// @name Comparison
@@ -54,10 +50,10 @@
  * @param zb the element size of @a vb
  * @return whether vector @a va is equivalent to vector @a vb
  */
-inline _Bool vector_eq_z(
+__vector_inline__ _Bool vector_eq_z(
     vector_c va,
     vector_c vb,
-    _Bool (*eq)(const void *a, const void *b) __attribute__((nonnull)),
+    _Bool (*eq)(const void *a, const void *b),
     size_t za,
     size_t zb)
   __attribute__((nonnull(3)));
@@ -108,11 +104,10 @@ inline _Bool vector_eq_z(
  * @param zb the element size of @a vb
  * @return whether vector @a va is equivalent to vector @a vb
  */
-inline _Bool vector_eq_with_z(
+__vector_inline__ _Bool vector_eq_with_z(
     vector_c va,
     vector_c vb,
-    _Bool (*eq)(const void *a, const void *b, void *data)
-      __attribute__((nonnull(1, 2))),
+    _Bool (*eq)(const void *a, const void *b, void *data),
     void *data,
     size_t za,
     size_t zb)
@@ -123,7 +118,7 @@ inline _Bool vector_eq_with_z(
 #define vector_cmp(va, vb, ...) \
   vector_cmp_z((va), (vb), __VA_ARGS__, VECTOR_Z((va)), VECTOR_Z((vb)))
 
-inline int vector_cmp_z(
+__vector_inline__ int vector_cmp_z(
     vector_c va,
     vector_c vb,
     int (*cmp)(const void *a, const void *b),
@@ -138,7 +133,7 @@ inline int vector_cmp_z(
 #define vector_cmp_with(va, vb, ...) \
   vector_cmp_with_z((va), (vb), __VA_ARGS__, VECTOR_Z((va)), VECTOR_Z((vb)))
 
-inline int vector_cmp_with_z(
+__vector_inline__ int vector_cmp_with_z(
     vector_c va,
     vector_c vb,
     int (*cmp)(const void *a, const void *b, void *data),
@@ -149,12 +144,8 @@ inline int vector_cmp_with_z(
 /// @}
 /// @}
 
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
-
 #endif /* VECTOR_COMPARISON_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "comparison.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

@@ -9,11 +9,8 @@
 #include "common.h"
 #include "resize.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
-inline vector_t vector_resize_z(vector_t vector, size_t volume, size_t z) {
+__vector_inline__
+vector_t vector_resize_z(vector_t vector, size_t volume, size_t z) {
   struct __vector_header_t *header = __vector_to_header(vector);
   size_t size;
 
@@ -32,7 +29,7 @@ inline vector_t vector_resize_z(vector_t vector, size_t volume, size_t z) {
   return header->data;
 }
 
-inline vector_t vector_shrink_z(vector_t vector, size_t z) {
+__vector_inline__ vector_t vector_shrink_z(vector_t vector, size_t z) {
   vector_t shrunk;
 
   shrunk = vector_resize_z(vector, vector_length(vector), z);
@@ -40,7 +37,8 @@ inline vector_t vector_shrink_z(vector_t vector, size_t z) {
   return shrunk != NULL ? shrunk : vector;
 }
 
-inline vector_t vector_ensure_z(vector_t vector, size_t length, size_t z) {
+__vector_inline__
+vector_t vector_ensure_z(vector_t vector, size_t length, size_t z) {
   if (length <= vector_volume(vector))
     return vector;
 
@@ -58,9 +56,5 @@ inline vector_t vector_ensure_z(vector_t vector, size_t length, size_t z) {
   // resize to just the length
   return vector_resize_z(vector, length, z);
 }
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
 
 #endif /* VECTOR_RESIZE_C */

@@ -6,10 +6,6 @@
 #include <stddef.h>
 #include "common.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
 /**
  * @brief Allocate and initialize a zero length vector
  *
@@ -17,7 +13,7 @@
  *
  * @return the new vector on success; otherwise @c NULL
  */
-inline vector_t vector_create(void) __attribute__((__malloc__));
+__vector_inline__ vector_t vector_create(void) __attribute__((__malloc__));
 
 /**
  * @brief Allocate and initialize a vector from @a length elements of @a data
@@ -48,8 +44,9 @@ inline vector_t vector_create(void) __attribute__((__malloc__));
  *
  * @see vector_import() - the implicit interface analogue
  */
-inline vector_t vector_import_z(const void *data, size_t length, size_t z)
-  __attribute__((__malloc__, nonnull));
+__attribute__((__malloc__, nonnull))
+__vector_inline__
+vector_t vector_import_z(const void *data, size_t length, size_t z);
 
 /**
  * @brief Allocate and initialize a vector from the argument list
@@ -117,15 +114,12 @@ inline vector_t vector_import_z(const void *data, size_t length, size_t z)
  *
  * @see vector_duplicate() - the implicit interface analogue
  */
-inline vector_t vector_duplicate_z(vector_c source, size_t z)
-  __attribute__((__malloc__, nonnull));
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
+__attribute__((__malloc__, nonnull))
+__vector_inline__
+vector_t vector_duplicate_z(vector_c source, size_t z);
 
 #endif /* VECTOR_CREATE_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "create.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

@@ -6,10 +6,6 @@
 #include <stddef.h>
 #include "common.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
 /**
  * @copybrief vector_append()
  *
@@ -70,7 +66,7 @@
  * @param z the element size of the @a vector
  * @return the resultant vector
  */
-inline vector_t vector_pull_z(vector_t vector, void *elmt, size_t z)
+__vector_inline__ vector_t vector_pull_z(vector_t vector, void *elmt, size_t z)
   __attribute__((nonnull(1), warn_unused_result));
 
 /**
@@ -117,7 +113,7 @@ inline vector_t vector_pull_z(vector_t vector, void *elmt, size_t z)
  *
  * @see vector_unshift() - the implicit interface analogue
  */
-inline vector_t vector_unshift_z(
+__vector_inline__ vector_t vector_unshift_z(
     restrict vector_t vector,
     const void *restrict elmt,
     size_t z)
@@ -171,15 +167,11 @@ inline vector_t vector_unshift_z(
  * @param z the element size of the @a vector
  * @return the resultant vector
  */
-inline vector_t vector_shift_z(vector_t vector, void *elmt, size_t z)
+__vector_inline__ vector_t vector_shift_z(vector_t vector, void *elmt, size_t z)
   __attribute__((nonnull(1), warn_unused_result));
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
 
 #endif /* VECTOR_SHIFT_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "shift.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

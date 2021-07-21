@@ -12,7 +12,7 @@ target_compile_definitions(stub INTERFACE
   malloc=stub_malloc realloc=stub_realloc free=stub_free)
 
 define_vector_target(vector_test SHARED EXCLUDE_FROM_ALL)
-target_compile_definitions(vector_test PUBLIC VECTOR_TEST)
+target_compile_definitions(vector_test PUBLIC __vector_inline__=)
 target_compile_options(vector_test PUBLIC -Wall -Wextra -Werror)
 target_link_libraries(vector_test PRIVATE stub)
 

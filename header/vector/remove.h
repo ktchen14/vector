@@ -3,13 +3,8 @@
 #ifndef VECTOR_REMOVE_H
 #define VECTOR_REMOVE_H
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
-#include "common.h"
-
 #include <stddef.h>
+#include "common.h"
 
 /**
  * @brief Remove the element at index @a i from the @a vector
@@ -55,7 +50,7 @@
  * @param z the element size of the @a vector
  * @return the resultant vector
  */
-inline vector_t vector_remove_z(vector_t vector, size_t i, size_t z)
+__vector_inline__ vector_t vector_remove_z(vector_t vector, size_t i, size_t z)
   __attribute__((nonnull, returns_nonnull, warn_unused_result));
 
 /**
@@ -106,8 +101,9 @@ inline vector_t vector_remove_z(vector_t vector, size_t i, size_t z)
  * @param z the element size of the @a vector
  * @return the resultant vector
  */
-inline vector_t vector_excise_z(vector_t vector, size_t i, size_t n, size_t z)
-  __attribute__((nonnull, returns_nonnull, warn_unused_result));
+__attribute__((nonnull, returns_nonnull, warn_unused_result))
+__vector_inline__
+vector_t vector_excise_z(vector_t vector, size_t i, size_t n, size_t z);
 
 /**
  * @brief Reduce the @length of the @a vector to @a length
@@ -144,15 +140,12 @@ inline vector_t vector_excise_z(vector_t vector, size_t i, size_t n, size_t z)
  * @param z the element size of the @a vector
  * @return the resultant vector
  */
-inline vector_t vector_truncate_z(vector_t vector, size_t length, size_t z)
-  __attribute__((nonnull, returns_nonnull, warn_unused_result));
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
+__attribute__((nonnull, returns_nonnull, warn_unused_result))
+__vector_inline__
+vector_t vector_truncate_z(vector_t vector, size_t length, size_t z);
 
 #endif /* VECTOR_REMOVE_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "remove.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

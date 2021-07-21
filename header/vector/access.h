@@ -6,10 +6,6 @@
 #include <stddef.h>
 #include "common.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
 /**
  * @brief Return a pointer to the element in the @a vector at index @a i
  *
@@ -121,8 +117,9 @@
  * @see vector_at() - the inverse operation to get a pointer to an element in a
  *   vector
  */
-inline size_t vector_index(vector_c vector, const void *elmt, size_t z)
-  __attribute__((nonnull, pure));
+__attribute__((nonnull, pure))
+__vector_inline__
+size_t vector_index(vector_c vector, const void *elmt, size_t z);
 
 /**
  * @brief Copy the element at index @a i in the @a vector into @a elmt
@@ -142,8 +139,9 @@ inline size_t vector_index(vector_c vector, const void *elmt, size_t z)
  *
  * @see vector_set() - the inverse operation to copy data into a vector
  */
-inline void vector_get(vector_c vector, size_t i, void *elmt, size_t z)
-  __attribute__((nonnull));
+__attribute__((nonnull))
+__vector_inline__
+void vector_get(vector_c vector, size_t i, void *elmt, size_t z);
 
 /**
  * @brief Copy the object at @a elmt into the @a vector at index @a i
@@ -164,15 +162,12 @@ inline void vector_get(vector_c vector, size_t i, void *elmt, size_t z)
  *
  * @see vector_get() - the inverse operation to copy data from a vector
  */
-inline void vector_set(vector_t vector, size_t i, const void *elmt, size_t z)
-  __attribute__((nonnull));
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
+__attribute__((nonnull))
+__vector_inline__
+void vector_set(vector_t vector, size_t i, const void *elmt, size_t z);
 
 #endif /* VECTOR_ACCESS_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "access.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

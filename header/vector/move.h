@@ -6,10 +6,6 @@
 #include <stddef.h>
 #include "common.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
 /**
  * @brief Swap the element at index @a i with the element at index @a j in the
  * @a vector
@@ -43,8 +39,9 @@
  *
  * @see vector_swap() - the implicit interface analogue
  */
-inline void vector_swap_z(vector_t vector, size_t i, size_t j, size_t z)
-  __attribute__((nonnull));
+__attribute__((nonnull))
+__vector_inline__
+void vector_swap_z(vector_t vector, size_t i, size_t j, size_t z);
 
 /**
  * @brief Move the element at index @a source to index @a target in the
@@ -100,16 +97,12 @@ inline void vector_swap_z(vector_t vector, size_t i, size_t j, size_t z)
  *
  * @see vector_move() - the implicit interface analogue
  */
-inline void vector_move_z(
-    vector_t vector, size_t target, size_t source, size_t z)
-  __attribute__((nonnull));
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
+__attribute__((nonnull))
+__vector_inline__
+void vector_move_z(vector_t vector, size_t target, size_t source, size_t z);
 
 #endif /* VECTOR_MOVE_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "move.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

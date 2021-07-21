@@ -11,11 +11,7 @@
 #include "common.h"
 #include "create.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
-inline vector_t vector_create(void) {
+__vector_inline__ vector_t vector_create(void) {
   struct __vector_header_t *header;
 
   if ((header = malloc(sizeof(*header))) == NULL)
@@ -26,7 +22,8 @@ inline vector_t vector_create(void) {
   return header->data;
 }
 
-inline vector_t vector_import_z(const void *data, size_t length, size_t z) {
+__vector_inline__
+vector_t vector_import_z(const void *data, size_t length, size_t z) {
   struct __vector_header_t *header;
 
   // Doesn't overflow because this is the size of data
@@ -41,7 +38,7 @@ inline vector_t vector_import_z(const void *data, size_t length, size_t z) {
   return memcpy(header->data, data, length * z);
 }
 
-inline vector_t vector_duplicate_z(vector_c source, size_t z) {
+__vector_inline__ vector_t vector_duplicate_z(vector_c source, size_t z) {
   struct __vector_header_t *header;
 
   size_t volume = vector_volume(source);
@@ -60,9 +57,5 @@ inline vector_t vector_duplicate_z(vector_c source, size_t z) {
 
   return memcpy(header->data, source, length * z);
 }
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
 
 #endif /* VECTOR_CREATE_C */

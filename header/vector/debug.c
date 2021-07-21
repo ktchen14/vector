@@ -8,11 +8,7 @@
 #include "debug.h"
 #include "access.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
-inline void vector_debug_z(
+__vector_inline__ void vector_debug_z(
     vector_c vector,
     void (*elmt_debug)(const void *elmt),
     size_t z) {
@@ -24,9 +20,5 @@ inline void vector_debug_z(
   }
   fputs("]\n", stderr);
 }
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
 
 #endif /* VECTOR_DEBUG_C */

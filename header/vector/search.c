@@ -11,11 +11,7 @@
 #include "search.h"
 #include "access.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
-inline size_t vector_find_z(
+__vector_inline__ size_t vector_find_z(
     vector_c vector,
     _Bool (*eqf)(const void *elmt, const void *data),
     const void *data,
@@ -23,7 +19,7 @@ inline size_t vector_find_z(
   return vector_find_next_z(vector, 0, eqf, data, z);
 }
 
-inline size_t vector_find_next_z(
+__vector_inline__ size_t vector_find_next_z(
     vector_c vector,
     size_t i,
     _Bool (*eqf)(const void *elmt, const void *data),
@@ -36,7 +32,7 @@ inline size_t vector_find_next_z(
   return SIZE_MAX;
 }
 
-inline size_t vector_find_last_z(
+__vector_inline__ size_t vector_find_last_z(
     vector_c vector,
     size_t i,
     _Bool (*eqf)(const void *elmt, const void *data),
@@ -49,7 +45,7 @@ inline size_t vector_find_last_z(
   return SIZE_MAX;
 }
 
-inline size_t vector_search_z(
+__vector_inline__ size_t vector_search_z(
     vector_c vector,
     const void *elmt,
     int (*cmpf)(const void *a, const void *b),
@@ -67,9 +63,5 @@ inline size_t vector_search_z(
 
   return i;
 }
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
 
 #endif /* VECTOR_SEARCH_C */

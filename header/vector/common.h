@@ -5,6 +5,10 @@
 
 #include <stddef.h>
 
+#ifndef __vector_inline__
+#define __vector_inline__ inline
+#endif /* __vector_inline__ */
+
 /**
  * @brief Used to indicate a vector with an indeterminate element type
  *
@@ -198,6 +202,6 @@ inline size_t vector_length(vector_c vector) {
 
 #endif /* VECTOR_COMMON_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "common.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

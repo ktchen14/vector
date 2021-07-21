@@ -7,10 +7,6 @@
 
 #include "common.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
 /// @addtogroup vector_module Vector
 /// @{
 /// @name Search
@@ -57,7 +53,7 @@
  * @param z the element size of the @a vector
  * @return the index of the element on success; otherwise @c SIZE_MAX
  */
-inline size_t vector_find_z(
+__vector_inline__ size_t vector_find_z(
     vector_c vector,
     _Bool (*eqf)(const void *elmt, const void *data),
     const void *data,
@@ -141,7 +137,7 @@ inline size_t vector_find_z(
  * @param z the element size of the @a vector
  * @return the index of the element on success; otherwise @c SIZE_MAX
  */
-inline size_t vector_find_next_z(
+__vector_inline__ size_t vector_find_next_z(
     vector_c vector,
     size_t i,
     _Bool (*eqf)(const void *elmt, const void *data),
@@ -224,7 +220,7 @@ inline size_t vector_find_next_z(
  * @param z the element size of the @a vector
  * @return the index of the element on success; otherwise @c SIZE_MAX
  */
-inline size_t vector_find_last_z(
+__vector_inline__ size_t vector_find_last_z(
     vector_c vector,
     size_t i,
     _Bool (*eqf)(const void *elmt, const void *data),
@@ -258,22 +254,18 @@ inline size_t vector_find_last_z(
 //=     int (*cmpf)(const void *a, const void *b))
 #define vector_search(v, ...) vector_search_z((v), __VA_ARGS__, VECTOR_Z((v)))
 
-inline size_t vector_search_z(
+__vector_inline__ size_t vector_search_z(
     vector_c vector,
     const void *elmt,
     int (*cmpf)(const void *a, const void *b),
     size_t z)
   __attribute__((nonnull(1, 3), pure));
 
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
-
 /// @}
 /// @}
 
 #endif /* VECTOR_SEARCH_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "search.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

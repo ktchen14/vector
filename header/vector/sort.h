@@ -6,10 +6,6 @@
 #include <stddef.h>
 #include "common.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
 /// @addtogroup vector_module Vector
 /// @{
 /// @name Sorting
@@ -71,7 +67,7 @@
  *   @endparblock
  * @param z the element size of the @a vector
  */
-inline void vector_sort_z(
+__vector_inline__ void vector_sort_z(
     vector_t vector,
     int (*cmp)(const void *a, const void *b),
     size_t z)
@@ -146,15 +142,11 @@ void vector_sort_with_z(
     size_t z)
   __attribute__((nonnull(1, 2)));
 
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
-
 /// @}
 /// @}
 
 #endif /* VECTOR_SORT_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "sort.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

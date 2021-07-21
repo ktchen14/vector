@@ -6,10 +6,6 @@
 #include <stddef.h>
 #include "common.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
 /**
  * @brief Insert the data at @a elmt into the @a vector at index @a i
  *
@@ -63,7 +59,7 @@
  *
  * @see vector_insert() - the implicit interface analogue
  */
-inline vector_t vector_insert_z(
+__vector_inline__ vector_t vector_insert_z(
     restrict vector_t vector,
     size_t i,
     const void *restrict elmt,
@@ -131,7 +127,7 @@ inline vector_t vector_insert_z(
  *
  * @see vector_inject() - the implicit interface analogue
  */
-inline vector_t vector_inject_z(
+__vector_inline__ vector_t vector_inject_z(
     restrict vector_t vector,
     size_t i,
     const void *restrict elmt,
@@ -184,7 +180,7 @@ inline vector_t vector_inject_z(
  *
  * @see vector_append_z() - the explicit interface analogue
  */
-inline vector_t vector_append_z(
+__vector_inline__ vector_t vector_append_z(
     restrict vector_t vector,
     const void *restrict elmt,
     size_t z)
@@ -237,19 +233,15 @@ inline vector_t vector_append_z(
  *
  * @see vector_extend_z() - the explicit interface analogue
  */
-inline vector_t vector_extend_z(
+__vector_inline__ vector_t vector_extend_z(
     restrict vector_t vector,
     const void *restrict elmt,
     size_t n,
     size_t z)
   __attribute__((nonnull(1), warn_unused_result));
 
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
-
 #endif /* VECTOR_INSERT_H */
 
-#ifndef VECTOR_TEST
+#if (-1- __vector_inline__ -1)
 #include "insert.c"
-#endif /* VECTOR_TEST */
+#endif /* __vector_inline__ */

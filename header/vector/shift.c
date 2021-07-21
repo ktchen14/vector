@@ -10,31 +10,25 @@
 #include "insert.h"
 #include "remove.h"
 
-#ifdef VECTOR_TEST
-#define inline
-#endif /* VECTOR_TEST */
-
-inline vector_t vector_pull_z(vector_t vector, void *elmt, size_t z) {
+__vector_inline__
+vector_t vector_pull_z(vector_t vector, void *elmt, size_t z) {
   if (elmt != NULL)
     vector_get(vector, vector_length(vector) - 1, elmt, z);
   return vector_remove_z(vector, vector_length(vector) - 1, z);
 }
 
-inline vector_t vector_unshift_z(
+__vector_inline__ vector_t vector_unshift_z(
     restrict vector_t vector,
     const void *restrict elmt,
     size_t z) {
   return vector_insert_z(vector, 0, elmt, z);
 }
 
-inline vector_t vector_shift_z(vector_t vector, void *elmt, size_t z) {
+__vector_inline__
+vector_t vector_shift_z(vector_t vector, void *elmt, size_t z) {
   if (elmt != NULL)
     vector_get(vector, 0, elmt, z);
   return vector_remove_z(vector, 0, z);
 }
-
-#ifdef VECTOR_TEST
-#undef inline
-#endif /* VECTOR_TEST */
 
 #endif /* VECTOR_SHIFT_C */
