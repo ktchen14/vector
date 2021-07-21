@@ -1,0 +1,43 @@
+version: v1.0
+name: Release (Major)
+
+agent: { machine: { os_image: ubuntu2004, type: e1-standard-2 } }
+
+blocks:
+- name: Release (Major)
+
+  task:
+    secrets: [{ name: Vector CI GitHub }, { name: Vector CI SSH }]
+    env_vars:
+    - { name: GIT_COMMITTER_NAME,  value: "Kaiting Chen" }
+    - { name: GIT_COMMITTER_EMAIL, value: "ktchen14@gmail.com" }
+    - { name: GIT_AUTHOR_NAME,     value: "Kaiting Chen" }
+    - { name: GIT_AUTHOR_EMAIL,    value: "ktchen14@gmail.com" }
+    jobs:
+    - name: Release (Major)
+      commands:
+      - checkout
+      - IFS=. read -r a b c < VERSION && next="$((a + 1)).0.0"
+
+      # Update the VERSION and push a tag
+      - echo "$next" > VERSION
+      - git commit -m "Release v$next" VERSION
+      - git tag "v$next"
+
+      - chmod 0600 ~/.ssh/id_github
+      - GIT_SSH_COMMAND="ssh -i ~/.ssh/id_github" git push origin "$SEMAPHORE_GIT_BRANCH" "v$next"
+
+      # Create the distribution artifact
+      - autoreconf -iv
+      - ./configure
+      - make dist
+      # && CFLAGS= make distcheck
+
+      # Install GitHub CLI
+      - curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+      - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+      - sudo apt update
+      - sudo apt install gh
+
+      # Create the release in GitHub
+      - gh release create "v$next" "vector-$next.tar.xz" -d -t "v$next" -n ''

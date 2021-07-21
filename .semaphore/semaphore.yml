@@ -1,43 +1,33 @@
 version: v1.0
 name: Initial Pipeline
 
-agent:
-  machine:
-    type: e1-standard-2
-
+agent: { machine: { os_image: ubuntu2004, type: e1-standard-2 } }
 global_job_config:
-  env_vars:
-  - name: CMAKE_VERSION
-    value: "3.16.5"
-  - name: CC
-    value: gcc-7
+  prologue:
+    commands:
+    - '[ -z "$CC" ] || command -v "$CC" || sudo install-package "$CC"'
+    - checkout
 
 blocks:
-- name: Download CMake
+- name: Simple Test
   task:
-    jobs:
-    - name: Download
-      matrix:
-      - env_var: CMAKE_VERSION
-        values:
-        - "3.12.4"
-        - "3.13.5"
-        - "3.14.7"
-        - "3.15.6"
-        - "3.16.5"
-        - "3.17.0"
-      commands:
-      - cache restore "CMake-$CMAKE_VERSION-Linux-x86_64"
-      - wget -N "https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz"
-      - cache store "CMake-$CMAKE_VERSION-Linux-x86_64" "cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz"
+    secrets: [{ name: Vector CI Codecov }]
 
-- name: Analysis
-  task:
     jobs:
-    - name: Address
+    - name: Unit Test
+      matrix: [{ env_var: CC, values: [clang-10, gcc-10] }]
+      commands:
+      - cmake . && ctest --output-on-failure
+
+    # - name: Installation Test
+    #   commands:
+    #   - autoreconf -iv
+    #   - ./configure
+    #   - make && make DESTDIR="$PWD/installation" install
+    #   - make DESTDIR="$PWD/installation" installcheck
+
+    - name: Address Sanitizer
       env_vars:
-      - name: CC
-        value: gcc-8
       - name: ASAN_OPTIONS
         value: "detect_stack_use_after_return=1,detect_invalid_pointer_pairs=1"
       - name: CFLAGS
@@ -45,60 +35,29 @@ blocks:
           -fsanitize=address,pointer-compare,pointer-subtract
           -fsanitize-address-use-after-scope
       commands:
-      - if [[ $CC = clang-* ]]; then sudo install-package "$CC"; fi
-      - cache restore "CMake-$CMAKE_VERSION-Linux-x86_64"
-      - sudo tar -C /usr/local -xzf "cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz" --strip-components=1
-      - checkout
-      - cmake .
-      - ctest --output-on-failure
+      - cmake . && ctest --output-on-failure
 
-    - name: Undefined Behavior
+    - name: Undefined Behavior Sanitizer
       env_vars:
-      - name: CFLAGS
-        value: -fsanitize=undefined
+      - { name: CFLAGS, value: -fsanitize=undefined }
       commands:
-      - if [[ $CC = clang-* ]]; then sudo install-package "$CC"; fi
-      - cache restore "CMake-$CMAKE_VERSION-Linux-x86_64"
-      - sudo tar -C /usr/local -xzf "cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz" --strip-components=1
-      - checkout
-      - cmake .
-      - ctest --output-on-failure
+      - cmake . && ctest --output-on-failure
 
-- name: Unit Test
+    - name: Code Coverage
+      commands:
+      - cmake . -DCODE_COVERAGE=ON
+      - ctest --output-on-failure
+      - bash <(curl -s https://codecov.io/bash)
+
+- name: Matrix Test (Ubuntu 20.04)
   task:
     jobs:
     - name: Test 1
-      matrix:
-      - env_var: CC
-        values:
-        - gcc-5
-        - gcc-6
-        - gcc-8
-        - clang-6.0
-        - clang-7
-        - clang-8
-        - clang-9
+      matrix: [{ env_var: CC, values: [clang-10, clang-11, gcc-9, gcc-10] }]
       commands:
-      - if [[ $CC = clang-* ]]; then sudo install-package "$CC"; fi
-      - cache restore "CMake-$CMAKE_VERSION-Linux-x86_64"
-      - sudo tar -C /usr/local -xzf "cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz" --strip-components=1
-      - checkout
-
-      - mkdir shared
-      - cd shared
-      - cmake -DBUILD_SHARED_LIBS=ON ..
-      - make
-      - cd ..
-
-      - mkdir static
-      - cd static
-      - cmake -DBUILD_SHARED_LIBS=OFF ..
-      - make
-      - cd ..
-
-      - cmake .
-      - make
-      - ctest --output-on-failure
+      - cmake -S . -B shared -DBUILD_SHARED_LIBS=ON && make -C shared
+      - cmake -S . -B static -DBUILD_SHARED_LIBS=NO && make -C static
+      - cmake . && make && ctest --output-on-failure
 
     - name: Test 2
       matrix:
@@ -106,41 +65,48 @@ blocks:
         values:
         - "3.13.5"
         - "3.14.7"
-        - "3.15.6"
-        - "3.17.0"
+        - "3.15.7"
+        - "3.16.9"
+        - "3.17.5"
+        - "3.18.6"
+        - "3.19.8"
+        - "3.20.5"
+        - "3.21.0"
       commands:
-      - if [[ $CC = clang-* ]]; then sudo install-package "$CC"; fi
       - cache restore "CMake-$CMAKE_VERSION-Linux-x86_64"
+      - wget -N "https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz"
+      - cache store "CMake-$CMAKE_VERSION-Linux-x86_64" "cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz"
       - sudo tar -C /usr/local -xzf "cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz" --strip-components=1
-      - checkout
+      - cmake -S . -B shared -DBUILD_SHARED_LIBS=ON && make -C shared
+      - cmake -S . -B static -DBUILD_SHARED_LIBS=NO && make -C static
+      - cmake . && make && ctest --output-on-failure
 
-      - mkdir shared
-      - cd shared
-      - cmake -DBUILD_SHARED_LIBS=ON ..
-      - make
-      - cd ..
-
-      - mkdir static
-      - cd static
-      - cmake -DBUILD_SHARED_LIBS=OFF ..
-      - make
-      - cd ..
-
-      - cmake .
-      - make
-      - ctest --output-on-failure
-
-- name: Coverage
+- name: Matrix Test (Ubuntu 18.04)
   task:
-    secrets:
-    - name: Vector CI Codecov
+    agent: { machine: { os_image: ubuntu1804, type: e1-standard-2 } }
+
     jobs:
-    - name: Coverage
+    - name: Test
+      env_vars: [{ name: CMAKE_VERSION, value: "3.16.9" }]
+      matrix:
+      - env_var: CC
+        values:
+        - clang-6.0
+        - clang-7
+        - clang-8
+        - clang-9
+        - gcc-5
+        - gcc-6
+        - gcc-7
+        - gcc-8
       commands:
-      - if [[ $CC = clang-* ]]; then sudo install-package "$CC"; fi
       - cache restore "CMake-$CMAKE_VERSION-Linux-x86_64"
       - sudo tar -C /usr/local -xzf "cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz" --strip-components=1
-      - checkout
-      - cmake . -DCODE_COVERAGE=ON
-      - ctest --output-on-failure
-      - bash <(curl -s https://codecov.io/bash)
+      - cmake -S . -B shared -DBUILD_SHARED_LIBS=ON && make -C shared
+      - cmake -S . -B static -DBUILD_SHARED_LIBS=NO && make -C static
+      - cmake . && make && ctest --output-on-failure
+
+promotions:
+- { name: Micro, pipeline_file: micro.yml }
+- { name: Minor, pipeline_file: minor.yml }
+- { name: Major, pipeline_file: major.yml }
