@@ -214,6 +214,6 @@ set(DOXYGEN_EXPAND_ONLY_PREDEF YES)
 # recursively expanded use the := operator instead of the = operator.
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
-set(DOXYGEN_PREDEFINED "__attribute__(x)=" "DOXYGEN")
+set(DOXYGEN_PREDEFINED "__attribute__(x)=" "__vector_inline__=inline")
 
 set(DOXYGEN_GENERATE_XML YES)
