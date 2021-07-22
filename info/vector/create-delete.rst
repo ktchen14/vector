@@ -5,6 +5,7 @@ Creation and Deletion
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_create()`
      - Allocate and initialize a zero length vector
@@ -15,6 +16,7 @@ Creation and Deletion
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_import()`
      - Allocate and initialize a vector from *length* elements of *data*
@@ -27,6 +29,7 @@ Creation and Deletion
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_import_z()`
      - Allocate and initialize a vector from *length* elements of *data*

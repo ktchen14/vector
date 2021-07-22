@@ -5,6 +5,7 @@ Debugging
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_debug()`
      - Print debugging information about the *vector* to ``stderr``
@@ -13,6 +14,7 @@ Debugging
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_debug_z()`
      - Print debugging information about the *vector* to ``stderr``

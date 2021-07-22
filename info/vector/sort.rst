@@ -5,6 +5,7 @@ Sorting
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_sort()`
      - Sort the *vector* in ascending order on a comparator
@@ -15,6 +16,7 @@ Sorting
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_sort_z()`
      - Sort the *vector* in ascending order on a comparator

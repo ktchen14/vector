@@ -5,6 +5,7 @@ Reordering
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_swap()`
      - Swap the element at index *i* with the element at index *j* in the *vector*
@@ -15,6 +16,7 @@ Reordering
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_swap_z()`
      - Swap the element at index *i* with the element at index *j* in the *vector*

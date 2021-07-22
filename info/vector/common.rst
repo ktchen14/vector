@@ -5,6 +5,7 @@ Fundamentals
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_t`
      - Used to indicate a vector with an indeterminate element type

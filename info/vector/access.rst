@@ -5,6 +5,7 @@ Access and Lookup
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_tail()`
      - Return a pointer to the last element in the *vector*
@@ -13,6 +14,7 @@ Access and Lookup
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_at()`
      - Return a pointer to the element in the *vector* at index *i*

@@ -5,6 +5,7 @@ Expansion and Contraction
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_resize()`
      - Resize the `volume <vector_volume>` of the *vector* to *volume*
@@ -17,6 +18,7 @@ Expansion and Contraction
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_resize_z()`
      - Resize the `volume <vector_volume>` of the *vector* to *volume*

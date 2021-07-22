@@ -5,6 +5,7 @@ Removal
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_remove()`
      - Remove the element at index *i* from the *vector*
@@ -17,6 +18,7 @@ Removal
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_remove_z()`
      - Remove the element at index *i* from the *vector*

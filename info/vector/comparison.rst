@@ -5,6 +5,7 @@ Comparison
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_eq()`
      - Return whether vector *va* is equivalent to vector *vb*
@@ -19,6 +20,7 @@ Comparison
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_eq_z()`
      - Return whether vector *va* is equivalent to vector *vb*

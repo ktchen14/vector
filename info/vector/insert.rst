@@ -5,6 +5,7 @@ Insertion
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_insert()`
      - Insert the data at *elmt* into the *vector* at index *i*
@@ -19,6 +20,7 @@ Insertion
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_insert_z()`
      - Insert the data at *elmt* into the *vector* at index *i*

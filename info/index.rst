@@ -21,6 +21,7 @@ Welcome to Vector's documentation!
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_t`
      - Used to indicate a vector with an indeterminate element type
@@ -45,6 +46,7 @@ Welcome to Vector's documentation!
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_import()`
      - Allocate and initialize a vector from *length* elements of *data*
@@ -105,6 +107,7 @@ Welcome to Vector's documentation!
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_import_z()`
      - Allocate and initialize a vector from *length* elements of *data*

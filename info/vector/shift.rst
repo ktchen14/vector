@@ -7,6 +7,7 @@ Stack-Like/Queue-Like Operations
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_push()`
      - Insert the data at *elmt* as the last element in the *vector*
@@ -21,6 +22,7 @@ Stack-Like/Queue-Like Operations
 .. list-table::
    :widths: auto
    :width: 100%
+   :align: left
 
    * - `vector_push_z()`
      - Insert the data at *elmt* as the last element in the *vector*
