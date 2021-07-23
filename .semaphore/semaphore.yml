@@ -19,12 +19,12 @@ blocks:
       commands:
       - cmake . && ctest --output-on-failure
 
-    # - name: Installation Test
-    #   commands:
-    #   - autoreconf -iv
-    #   - ./configure
-    #   - make && make DESTDIR="$PWD/installation" install
-    #   - make DESTDIR="$PWD/installation" installcheck
+    - name: Installation Test
+      commands:
+      - autoreconf -iv
+      - ./configure
+      - make && make DESTDIR="$PWD/installation" install
+      - make DESTDIR="$PWD/installation" installcheck
 
     - name: Address Sanitizer
       env_vars:

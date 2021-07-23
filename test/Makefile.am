@@ -1,5 +1,6 @@
 # =============================== System Test =============================== #
 
+MOSTLYCLEANFILES = test_system
 EXTRA_PROGRAMS = test_system
 test_system_SOURCES = system.c
 
