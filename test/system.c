@@ -7,10 +7,9 @@ int main() {
   for (size_t i = 0; i < 20; i++)
     vector = vector_append(vector, &i);
 
-  assert(vector_length(vector) == 20);
-
   for (size_t i = 0; i < vector_length(vector); i++)
     assert(vector[i] == i);
+  assert(vector_length(vector) == 20);
 
   return 0;
 }
