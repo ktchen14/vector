@@ -1,24 +1,27 @@
 Fundamentals
 ============
 
-.. rubric:: Common Interface
-.. list-table::
+.. table::
    :widths: auto
    :width: 100%
    :align: left
 
-   * - `vector_t`
-     - Used to indicate a vector with an indeterminate element type
-   * - `vector_t()`
-     - Construct the type name of a vector with element type *type*
-   * - `vector_c`
-     - A `vector_t` with a ``const`` element type
-   * - `vector_c()`
-     - Construct the type name of a vector with ``const`` element type *type*
-   * - `vector_length()`
-     - Return the length of the *vector*
-   * - `vector_volume()`
-     - Return the volume of the *vector*
+   +-------------------+-------------------------------------------------------+
+   | `vector_t`        | Used to indicate a vector with an indeterminate       |
+   |                   | element type                                          |
+   +-------------------+-------------------------------------------------------+
+   | `vector_t()`      | Construct the type name of a vector with element type |
+   |                   | *type*                                                |
+   +-------------------+-------------------------------------------------------+
+   | `vector_c`        | A `vector_t` with a ``const`` element type            |
+   +-------------------+-------------------------------------------------------+
+   | `vector_c()`      | Construct the type name of a vector with ``const``    |
+   |                   | element type *type*                                   |
+   +-------------------+-------------------------------------------------------+
+   | `vector_length()` | Return the length of the *vector*                     |
+   +-------------------+-------------------------------------------------------+
+   | `vector_volume()` | Return the volume of the *vector*                     |
+   +-------------------+-------------------------------------------------------+
 
 .. autoaeratetype:: vector_t
 .. autoaeratemacro:: vector_t
