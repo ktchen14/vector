@@ -268,6 +268,7 @@ __vector_inline__ int vector_cmp_z(
  *
  *   - @a a as a pointer to an element from vector @a va
  *   - @a b as a pointer to an element from vector @a vb
+ *   - @a data as the contextual information
  *
  *   And should return a negative integer when the element at @a a is less than
  *   the element at @a b, a positive integer when the element at @a a is greater
@@ -317,6 +318,7 @@ __vector_inline__ int vector_cmp_z(
  *
  *   - @a a as a pointer to an element from vector @a va
  *   - @a b as a pointer to an element from vector @a vb
+ *   - @a data as the contextual information
  *
  *   And should return a negative integer when the element at @a a is less than
  *   the element at @a b, a positive integer when the element at @a a is greater

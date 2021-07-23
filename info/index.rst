@@ -13,8 +13,7 @@ Welcome to Vector's documentation!
    vector/insert
    vector/remove
    vector/shift
-   vector/move
-   vector/sort
+   vector/move-sort
    vector/comparison
 
 .. rubric:: Common Interface
@@ -100,8 +99,6 @@ Welcome to Vector's documentation!
 
    * - `vector_sort()`
      - Sort the *vector* in ascending order on a comparator
-   * - `vector_sort_with()`
-     - Sort the *vector* in ascending order on a contextual comparator
 
 .. rubric:: Explicit Interface
 .. list-table::
@@ -167,8 +164,6 @@ Welcome to Vector's documentation!
 
    * - `vector_sort_z()`
      - Sort the *vector* in ascending order on a comparator
-   * - `vector_sort_with_z()`
-     - Sort the *vector* in ascending order on a contextual comparator
 
 Indices and tables
 ==================

@@ -1,5 +1,5 @@
-Reordering
-==========
+Reordering and Sorting
+======================
 
 .. table::
    :widths: auto
@@ -15,8 +15,14 @@ Reordering
    +-------------------+ in the *vector*                                       |
    | `vector_move_z()` |                                                       |
    +-------------------+-------------------------------------------------------+
+   | `vector_sort()`   | Sort the *vector* in ascending order on a comparator  |
+   +-------------------+                                                       |
+   | `vector_sort_z()` |                                                       |
+   +-------------------+-------------------------------------------------------+
 
 .. autoaeratefunction:: vector_swap
 .. autoaeratefunction:: vector_swap_z
 .. autoaeratefunction:: vector_move
 .. autoaeratefunction:: vector_move_z
+.. autoaeratefunction:: vector_sort
+.. autoaeratefunction:: vector_sort_z

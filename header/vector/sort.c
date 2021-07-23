@@ -10,9 +10,7 @@
 #include "sort.h"
 
 __vector_inline__ void vector_sort_z(
-    vector_t vector,
-    int (*cmp)(const void *a, const void *b),
-    size_t z) {
+    vector_t vector, int (*cmp)(const void *a, const void *b), size_t z) {
   qsort(vector, vector_length(vector), z, cmp);
 }
 
