@@ -6,122 +6,106 @@
 #include <stddef.h>
 
 /**
+ * @brief Construct the name of a vector type with element type as the operand
+ *
+ * @par Example
+ * @code{.c}
+ *   vector_on(int)                // element type is int
+ *   vector_on(const int)          // element type is const int
+ *   vector_on(int[4])             // element type is int[4]
+ *   vector_on(int *)              // element type is int *
+ *   vector_on(int (*)(void))      // element type is int (*)(void)
+ *   vector_on(vector_on(int))     // element type is int *
+ *   vector_on(struct { int i; })  // element type is struct { int i; }
+ *   vector_on(enum E { A, B })    // element type is enum E
+ * @endcode
+ *
+ * The type of a vector with element type @c T is just <tt>T *</tt>, so
+ * functionally, this just constructs the type of pointer-to-operand, such that
+ * these are equivalent:
+ *
+ * @code{.c}
+ *   int           *vector;
+ *   vector_on(int) vector;
+ * @endcode
+ *
+ * However, this is useful as a form of in-band documentation to differentiate
+ * an object intended to be used as a normal pointer from one intended to be
+ * used as a vector. In addition, the resultant name is the type of the vector
+ * itself, such that these are equivalent:
+ *
+ * @code{.c}
+ *   int           *a, *b, *c;
+ *   vector_on(int) a,  b,  c;
+ * @endcode
+ *
+ * The operand must be the name of a complete object type; otherwise the
+ * behavior is undefined, though this macro will attempt to fail compilation in
+ * this case. Any identifiers introduced in the operand, as part of a
+ * definition, are subsequently declared in the enclosing scope. The operand is
+ * evaluated for its side effects if and only if it's the name of a variably
+ * modified type. No implicit conversions are performed on the operand, so type
+ * qualifiers are preserved in the resultant element type:
+ *
+ * @code{.c}
+ *   // undefined behavior as the operand isn't an object type
+ *   vector_on(int (void))
+ *
+ *   // undefined behavior as the operand is an incomplete type
+ *   vector_on(int[])
+ *
+ *   // undefined behavior as the operand is an expression
+ *   vector_on(sizeof(int))
+ *
+ *   vector_on(struct S { enum { A, B } i; }) vector;
+ *   struct S object;             // struct S is defined here
+ *   int x = A, y = B;            // A and B are defined here
+ *
+ *   size_t n = 1;
+ *   vector_on(int[n++]) vector;  // vector will have element type int[1]
+ *   assert(n == 2);
+ *
+ *   // vector will have element type int *restrict
+ *   vector_on(int *restrict) vector;
+ *
+ *   // vector will have element type const volatile _Atomic int
+ *   vector_on(const volatile _Atomic int) vector;
+ * @endcode
+ *
+ * On the rare occassion that it's useful to declare a vector with an incomplete
+ * or indeterminate element type, declare the vector as a normal pointer or with
+ * ::vector_t:
+ *
+ * @code{.c}
+ *   int (*vector)[];  // vector will have element type int[]
+ *   vector_t vector;  // vector will have an indeterminate element type
+ * @endcode
+ *
+ * @param ... the name of a complete object type
+ * @return the name of a vector type with element type as the operand @a ...
+ */
+#define vector_on(...) __typeof__( \
+    &(__typeof__(__attribute__(()) __VA_ARGS__) []) { }[0] \
+)
+
+/**
  * @brief Used to indicate a vector with an indeterminate element type
  *
  * This is intended to be used strictly when the element type of a vector is
- * indeterminate (such as when implementing this file) and shouldn't be used
- * otherwise. Instead a normal C pointer should be used. For example a vector
- * with element type @c size_t should be declared and created with either of:
+ * indeterminate (such as when implementing this library) and shouldn't be used
+ * otherwise. Instead use vector_on() when the element type is a complete object
+ * type, or a normal pointer otherwise. For example a vector with element type
+ * @c size_t should be declared and created with either of:
  *
  * @code{.c}
- *   size_t          *v_size = vector_create();
- *   vector_t(size_t) v_size = vector_create();
+ *   size_t           *v_size = vector_create();
+ *   vector_on(size_t) v_size = vector_create();
  * @endcode
  */
 typedef void * vector_t;
 
-/**
- * @brief Construct the type name of a vector with element type @a type
- *
- * @note This function-like macro is used to construct the type name of a vector
- *   with a determinate element type and is invoked as <tt>vector_t(type)</tt>.
- *   With no arguments, @ref vector_t is a real type name (it doesn't invoke
- *   this macro) and is used to indicate a vector with an indeterminate element
- *   type, i.e. <tt>void *</tt>.
- *
- * Functionally, this doesn't do much more than adding a <tt>*</tt> to its
- * argument, such that these are equivalent:
- *
- * @code{.c}
- *   size_t          *vector;
- *   vector_t(size_t) vector;
- * @endcode
- *
- * However, this is useful as a form of inline documentation to differentiate an
- * object that's intended to be used as a normal pointer to a type from an
- * object that's intended to be used as a vector with a certain element type.
- * For example:
- *
- * @code{.c}
- *   vector_t(int) vector = vector_define(int, ...);
- *   for (size_t i = 0; i < vector_length(vector); i++) {
- *     int *number = vector + i;
- *     ...
- *   }
- * @endcode
- *
- * In addition, the resultant type name is of a vector type itself, such that
- * these are equivalent (note the repeated asterisk):
- *
- * @code{.c}
- *   size_t          *a, *b, *c;
- *   vector_t(size_t) a,  b,  c;
- * @endcode
- *
- * This should accept any complete or incomplete type name, except an enumerated
- * type declaration or type name that introduces a new enumerated type.
- */
-#define vector_t(type) __typeof__(( \
-  /* Fail unless the argument is an actual type. Otherwise the compiler is */ \
-  /* silent on this kind of mistake: */ \
-  /*   int8_t time; vector_t(time) vector;  => (int8_t *) */ \
-  /* When this was intended: */ \
-  /*   vector_t(time_t) vector;             => (time_t *) */ \
-  /* A call to __builtin_types_compatible_p() doesn't evaluate either */ \
-  /* operand, even if it's the name of a variably modified type. If */ \
-  /* the argument isn't a type, this won't compile with "expected a type". */ \
-  (void) __builtin_types_compatible_p(type, void), \
-  /* Make an expression such that its type is a pointer to `type` */ \
-  (__typeof__(type) *) NULL \
-))
-
 /// A @ref vector_t with a @c const element type
 typedef void const * vector_c;
-
-/**
- * @brief Construct the type name of a vector with @c const element type @a type
- *
- * @note This function-like macro is used to construct the type name of a vector
- *   with a determinate element type and is invoked as <tt>vector_c(type)</tt>.
- *   With no arguments, @ref vector_t is a real type name (it doesn't invoke
- *   this macro) and is used to indicate a vector with an indeterminate element
- *   type, i.e. <tt>const void *</tt>.
- *
- * Functionally, this doesn't do much more than adding a <tt>const *</tt> to its
- * argument, such that these are equivalent:
- *
- * @code{.c}
- *   const int    *vector;
- *   vector_c(int) vector;
- * @endcode
- *
- * However, this is useful as a form of inline documentation to differentiate an
- * object that's intended to be used as a normal pointer to a type from an
- * object that's intended to be used as a vector with a certain element type. In
- * addition, the resultant type name is of a vector type itself, such that these
- * are equivalent:
- *
- * @code{.c}
- *   const int    *a, *b, *c;
- *   vector_c(int) a,  b,  c;
- * @endcode
- *
- * This should accept any complete or incomplete type name, except an enumerated
- * type declaration or type name that introduces a new enumerated type.
- */
-#define vector_c(type) __typeof__(( \
-  /* Fail unless the argument is an actual type. Otherwise the compiler is */ \
-  /* silent on this kind of mistake: */ \
-  /*   int8_t time; vector_c(time) vector;  => (const int8_t *) */ \
-  /* When this was intended: */ \
-  /*   vector_c(time_t) vector;             => (const time_t *) */ \
-  /* A call to __builtin_types_compatible_p() doesn't evaluate either */ \
-  /* operand, even if it's the name of a variably modified type. If */ \
-  /* the argument isn't a type, this won't compile with "expected a type". */ \
-  (void) __builtin_types_compatible_p(type, void), \
-  /* Make an expression such that its type is a pointer to const `type` */ \
-  (const __typeof__(type) *) NULL \
-))
 
 /**
  * @brief Return the volume of the @a vector

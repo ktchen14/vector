@@ -2,7 +2,7 @@
 #include <vector.h>
 
 int main() {
-  vector_t(size_t) vector = vector_create();
+  vector_on(size_t) vector = vector_create();
 
   for (size_t i = 0; i < 20; i++)
     vector = vector_append(vector, &i);

@@ -4,7 +4,7 @@
 #include "test.h"
 
 void test_vector_at(void) {
-  vector_t(int) vector = vector_define(int, 1, 2, 3, 4, 5, 6, 7, 8);
+  vector_on(int) vector = vector_define(int, 1, 2, 3, 4, 5, 6, 7, 8);
   int number = 0;
 
   // It evaluates each argument once
@@ -55,7 +55,7 @@ void test_vector_at(void) {
 }
 
 void test_vector_get(void) {
-  vector_t(int) vector = vector_define(int, 1, 2, 3, 5, 8, 13);
+  vector_on(int) vector = vector_define(int, 1, 2, 3, 5, 8, 13);
 
   // It copies the element at the index in the vector to elmt
   int data = 0;

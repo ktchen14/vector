@@ -32,9 +32,9 @@ bool vector_eq_z(
 }
 
 void test_vector_eq(void) {
-  vector_t(int) va = vector_define(int, 1, 2, 3, 5, 8, 13, 21);
-  vector_t(long) vb = vector_define(long, 1, 2, 3, 5, 8, 13, 21);
-  vector_t(int) vector;
+  vector_on(int) va = vector_define(int, 1, 2, 3, 5, 8, 13, 21);
+  vector_on(long) vb = vector_define(long, 1, 2, 3, 5, 8, 13, 21);
+  vector_on(int) vector;
   int number = 0;
 
   // It evaluates each argument once
@@ -102,9 +102,9 @@ bool vector_eq_with_z(
 }
 
 void test_vector_eq_with(void) {
-  vector_t(int) va = vector_define(int, 1, 2, 3, 5, 8, 13, 21);
-  vector_t(long) vb = vector_define(long, 1, 2, 3, 5, 8, 13, 21);
-  vector_t(int) vector;
+  vector_on(int) va = vector_define(int, 1, 2, 3, 5, 8, 13, 21);
+  vector_on(long) vb = vector_define(long, 1, 2, 3, 5, 8, 13, 21);
+  vector_on(int) vector;
   bool data;
   bool *fail_next = &data;
   int number = 0;
@@ -176,8 +176,8 @@ int vector_cmp_z(
 }
 
 void test_vector_cmp(void) {
-  vector_t(int) va = vector_define(int, 1, 2, 3, 5, 8, 13, 21);
-  vector_t(long) vb = vector_define(long, 1, 2, 3, 5, 8, 13, 21);
+  vector_on(int) va = vector_define(int, 1, 2, 3, 5, 8, 13, 21);
+  vector_on(long) vb = vector_define(long, 1, 2, 3, 5, 8, 13, 21);
   int number = 0;
 
   // It evaluates each argument once
@@ -256,8 +256,8 @@ int vector_cmp_with_z(
 }
 
 void test_vector_cmp_with(void) {
-  vector_t(int) va = vector_define(int, 1, 2, 3, 5, 8, 13, 21);
-  vector_t(long) vb = vector_define(long, 1, 2, 3, 5, 8, 13, 21);
+  vector_on(int) va = vector_define(int, 1, 2, 3, 5, 8, 13, 21);
+  vector_on(long) vb = vector_define(long, 1, 2, 3, 5, 8, 13, 21);
   bool data;
   bool *fail_next = &data;
   int number = 0;
