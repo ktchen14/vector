@@ -7,13 +7,14 @@ Fundamentals
    :align: left
 
    +-------------------+-------------------------------------------------------+
-   | `vector_on()`     | Construct the name of a vector type with element type |
-   |                   | as the operand                                        |
+   | `vector_on()`     | The type of a vector with the operand as the element  |
+   |                   | type                                                  |
    +-------------------+-------------------------------------------------------+
-   | `vector_t`        | Used to indicate a vector with an indeterminate       |
-   |                   | element type                                          |
+   | `vector_t`        | The type of a vector with an indeterminate element    |
+   |                   | type                                                  |
    +-------------------+-------------------------------------------------------+
-   | `vector_c`        | A `vector_t` with a ``const`` element type            |
+   | `vector_c`        | A vector type like `vector_t` with a ``const``        |
+   |                   | qualified element type                                |
    +-------------------+-------------------------------------------------------+
    | `vector_length()` | Return the length of the *vector*                     |
    +-------------------+-------------------------------------------------------+

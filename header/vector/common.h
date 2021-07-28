@@ -6,7 +6,7 @@
 #include <stddef.h>
 
 /**
- * @brief Construct the name of a vector type with element type as the operand
+ * @brief The type of a vector with the operand as the element type
  *
  * @par Example
  * @code{.c}
@@ -82,14 +82,14 @@
  * @endcode
  *
  * @param ... the name of a complete object type
- * @return the name of a vector type with element type as the operand @a ...
+ * @return the name of a vector type with the operand @a ... as the element type
  */
 #define vector_on(...) __typeof__( \
     &(__typeof__(__attribute__(()) __VA_ARGS__) []) { }[0] \
 )
 
 /**
- * @brief Used to indicate a vector with an indeterminate element type
+ * @brief The type of a vector with an indeterminate element type
  *
  * This is intended to be used strictly when the element type of a vector is
  * indeterminate (such as when implementing this library) and shouldn't be used
@@ -104,7 +104,7 @@
  */
 typedef void * vector_t;
 
-/// A @ref vector_t with a @c const element type
+/// A vector type like ::vector_t with a @c const qualified element type
 typedef void const * vector_c;
 
 /**
