@@ -49,13 +49,13 @@
  *
  * @code{.c}
  *   // undefined behavior as the operand isn't an object type
- *   vector_on(int (void))
+ *   vector_on(int (void)) vector;
  *
  *   // undefined behavior as the operand is an incomplete type
- *   vector_on(int[])
+ *   vector_on(int[]) vector;
  *
  *   // undefined behavior as the operand is an expression
- *   vector_on(sizeof(int))
+ *   vector_on(sizeof(int)) vector;
  *
  *   vector_on(struct S { enum { A, B } i; }) vector;
  *   struct S object;             // struct S is defined here
@@ -63,7 +63,7 @@
  *
  *   size_t n = 1;
  *   vector_on(int[n++]) vector;  // vector will have element type int[1]
- *   assert(n == 2);
+ *   n == 2;
  *
  *   // vector will have element type int *restrict
  *   vector_on(int *restrict) vector;
@@ -110,13 +110,37 @@ typedef void const * vector_c;
 /**
  * @brief Return the volume of the @a vector
  *
+ * @par Example
+ * @code{.c}
+ *   vector_on(int) vector = vector_create();
+ *   vector_volume(vector) == 0;
+ *
+ *   vector = vector_append(vector, &(int) { 1 });
+ *   vector_volume(vector) == 2;
+ * @endcode
+ *
  * A vector's volume is the number of elements that it can hold without a
- * reallocation and should always be greater than or equal to the vector's
- * @length.
+ * reallocation and should always be greater than or equal to its @length.
  */
 inline size_t vector_volume(vector_c vector) __attribute__((nonnull, pure));
 
-/// Return the length of (the number of elements in) the @a vector
+/**
+ * @brief Return the length of (the number of elements in) the @a vector
+ *
+ * @par Example
+ * @code{.c}
+ *   vector_on(int) vector = vector_create();
+ *   vector_length(vector) == 0;
+ *
+ *   vector = vector_append(vector, &(int) { 1 });
+ *   vector_length(vector) == 1;
+ * @endcode
+ *
+ * A vector with element type @c T and length @c l has identical behavior to an
+ * array of type <tt>T[l]</tt> that's undergone array-to-pointer conversion.
+ *
+ * This should always be less than or equal to the @volume of the @a vector.
+ */
 inline size_t vector_length(vector_c vector) __attribute__((nonnull, pure));
 
 /// @cond INTERNAL
