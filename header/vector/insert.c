@@ -13,10 +13,7 @@
 #include "resize.h"
 
 __vector_inline__ vector_t vector_insert_z(
-    restrict vector_t vector,
-    size_t i,
-    const void *restrict elmt,
-    size_t z) {
+    restrict vector_t vector, size_t i, const void *restrict elmt, size_t z) {
   return vector_inject_z(vector, i, elmt, 1, z);
 }
 
@@ -50,17 +47,12 @@ __vector_inline__ vector_t vector_inject_z(
 }
 
 __vector_inline__ vector_t vector_append_z(
-    restrict vector_t vector,
-    const void *restrict elmt,
-    size_t z) {
+    restrict vector_t vector, const void *restrict elmt, size_t z) {
   return vector_inject_z(vector, vector_length(vector), elmt, 1, z);
 }
 
 __vector_inline__ vector_t vector_extend_z(
-    restrict vector_t vector,
-    const void *restrict elmt,
-    size_t n,
-    size_t z) {
+    restrict vector_t vector, const void *restrict elmt, size_t n, size_t z) {
   return vector_inject_z(vector, vector_length(vector), elmt, n, z);
 }
 
