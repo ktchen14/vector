@@ -81,6 +81,8 @@
  *   vector_t vector;  // vector will have an indeterminate element type
  * @endcode
  *
+ * @warning The behavior of this macro is undefined when the operand isn't the
+ *   name of a complete object type.
  * @param ... the name of a complete object type
  * @return the name of a vector type with the operand @a ... as the element type
  */
