@@ -47,6 +47,9 @@
  * appended to the @a vector. If @a elmt is @c NULL then the inserted element
  * will be uninitialized.
  *
+ * If the @a vector didn't have an element type before this operation then the
+ * type of the object at @a elmt will become the element type of the @a vector.
+ *
  * @warning @parblock The behavior of this operation is undefined when:
  *
  *   - @a i is greater than the length of the @a vector
@@ -102,6 +105,9 @@
  * If @a i is the length of the @a vector then the object will instead be
  * appended to the @a vector. If @a elmt is @c NULL then the inserted element
  * will be uninitialized.
+ *
+ * If the @a vector didn't have an element type before this operation then the
+ * type of the object at @a elmt will become the element type of the @a vector.
  *
  * @warning @parblock The behavior of this operation is undefined when:
  *
@@ -162,6 +168,10 @@ __vector_inline__ vector_t vector_insert_z(
  * will instead be appended to the @a vector. If @a elmt is @c NULL then the
  * inserted elements will be uninitialized.
  *
+ * If the @a vector didn't have an element type before this operation then,
+ * unless @a n is zero, the element type of @a elmt will become the element type
+ * of the @a vector.
+ *
  * @warning @parblock The behavior of this operation is undefined when:
  *
  *   - @a i is greater than the length of the @a vector
@@ -221,6 +231,10 @@ __vector_inline__ vector_t vector_insert_z(
  * will instead be appended to the @a vector. If @a elmt is @c NULL then the
  * inserted elements will be uninitialized.
  *
+ * If the @a vector didn't have an element type before this operation then,
+ * unless @a n is zero, the element type of @a elmt will become the element type
+ * of the @a vector.
+ *
  * @warning @parblock The behavior of this operation is undefined when:
  *
  *   - @a i is greater than the length of the @a vector
@@ -277,6 +291,9 @@ __vector_inline__ vector_t vector_inject_z(
  *
  * If @a elmt is @c NULL then the appended element will be uninitialized.
  *
+ * If the @a vector didn't have an element type before this operation then the
+ * type of the object at @a elmt will become the element type of the @a vector.
+ *
  * @warning @parblock The behavior of this operation is undefined when:
  *
  *   - @a elmt isn't @c NULL and a read from @a elmt, of the same size as the
@@ -323,6 +340,9 @@ __vector_inline__ vector_t vector_inject_z(
  * value of @c errno set by realloc() retained.
  *
  * If @a elmt is @c NULL then the appended element will be uninitialized.
+ *
+ * If the @a vector didn't have an element type before this operation then the
+ * type of the object at @a elmt will become the element type of the @a vector.
  *
  * @warning @parblock The behavior of this operation is undefined when:
  *
@@ -377,6 +397,10 @@ __vector_inline__ vector_t vector_append_z(
  *
  * If @a elmt is @c NULL then the appended elements will be uninitialized.
  *
+ * If the @a vector didn't have an element type before this operation then,
+ * unless @a n is zero, the element type of @a elmt will become the element type
+ * of the @a vector.
+ *
  * @warning @parblock The behavior of this operation is undefined when:
  *
  *   - @a elmt isn't @c NULL and a read from @a elmt, of the same size as the
@@ -428,6 +452,10 @@ __vector_inline__ vector_t vector_append_z(
  * value of @c errno set by realloc() retained.
  *
  * If @a elmt is @c NULL then the appended elements will be uninitialized.
+ *
+ * If the @a vector didn't have an element type before this operation then,
+ * unless @a n is zero, the element type of @a elmt will become the element type
+ * of the @a vector.
  *
  * @warning @parblock The behavior of this operation is undefined when:
  *

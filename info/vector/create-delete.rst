@@ -7,7 +7,8 @@ Creation and Deletion
    :align: left
 
    +------------------------+--------------------------------------------------+
-   | `vector_create()`      | Allocate and initialize a zero length vector     |
+   | `vector_create()`      | Allocate and initialize a vector with zero       |
+   |                        | length and volume                                |
    +------------------------+--------------------------------------------------+
    | `vector_import()`      | Allocate and initialize a vector from *length*   |
    +------------------------+ elements of *data*                               |
