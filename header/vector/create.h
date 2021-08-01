@@ -32,10 +32,9 @@ __vector_inline__ vector_t vector_create(void) __attribute__((__malloc__));
  * @endcode
  *
  * On success, this will create and return a vector with @a length elements
- * copied from @a data. The element type of the created vector will be the same
- * as the element type of @a data unless @a length is zero, in which case it
- * will have no element type. It will have @length and @volume equivalent to @a
- * length. Regardless of the element type of @a data, the created vector will be
+ * copied from @a data and with @length and @volume equivalent to @a length. The
+ * element type of the created vector is the same as the element type of @a data
+ * unless @a length is zero, in which case it has no element type but will be
  * suitably aligned for elements of any object type with fundamental alignment.
  *
  * On failure the value of @c errno set by malloc() will be retained.
@@ -65,12 +64,10 @@ __vector_inline__ vector_t vector_create(void) __attribute__((__malloc__));
  * @endcode
  *
  * On success, this will create and return a vector with @a length elements
- * copied from @a data. The element type of the created vector will be the same
- * as the element type of @a data unless @a length is zero, in which case it
- * will have no element type. It will have @length and @volume equivalent to @a
- * length. Regardless of the element type of @a data or the element size @a z,
- * the created vector will be suitably aligned for elements of any object type
- * with fundamental alignment.
+ * copied from @a data and with @length and @volume equivalent to @a length. The
+ * element type of the created vector is the same as the element type of @a data
+ * unless @a length is zero, in which case it has no element type but will be
+ * suitably aligned for elements of any object type with fundamental alignment.
  *
  * On failure the value of @c errno set by malloc() will be retained.
  *
@@ -105,12 +102,11 @@ vector_t vector_import_z(const void *data, size_t length, size_t z);
  * from the argument list. @a type must be a complete object type compatible
  * with the type of each argument in <em>...</em>.
  *
- * On success, this will create and return a vector with @length and @volume
- * equivalent to the number of arguments in <em>...</em>. Its element type will
- * be @a type, unless no arguments in @a ... are passed, in which case it will
- * have no element type. Regardless of @a type or the arguments in @a ..., the
- * created vector will be suitably aligned for any object type with fundamental
- * alignment.
+ * On success, this will create and return a vector with elements @a ... and
+ * with @length and @volume equivalent to the number of arguments in the
+ * <em>...</em>. Its element type is @a type, unless no arguments are passed as
+ * part of @a ..., in which case it has no element type but will be suitably
+ * aligned for elements of any object type with fundamental alignment.
  *
  * On failure the value of @c errno set by malloc() will be retained.
  *
@@ -153,9 +149,9 @@ vector_t vector_import_z(const void *data, size_t length, size_t z);
  * @a source. If that fails and the length of @a source is less than its volume,
  * then this will attempt to create a vector with just the same length as @a
  * source. If either attempt is successful, then this will memcpy() each element
- * in @a source into the created vector. Regardless of the element type of @a
- * source, the created vector will be suitably aligned for any object type with
- * fundamental alignment.
+ * in @a source into the created vector. Its element type is the same as the
+ * element type of @a source and it will be suitably aligned for elements of any
+ * object type with fundamental alignment.
  *
  * On failure the value of @c errno set by malloc() will be retained.
  *
@@ -183,9 +179,9 @@ vector_t vector_import_z(const void *data, size_t length, size_t z);
  * @a source. If that fails and the length of @a source is less than its volume,
  * then this will attempt to create a vector with just the same length as @a
  * source. If either attempt is successful, then this will memcpy() each element
- * in @a source into the created vector. Regardless of the element type of @a
- * source or the element size @a z, the created vector will be suitably aligned
- * for any object type with fundamental alignment.
+ * in @a source into the created vector. Its element type is the same as the
+ * element type of @a source and it will be suitably aligned for elements of any
+ * object type with fundamental alignment.
  *
  * On failure the value of @c errno set by malloc() will be retained.
  *
